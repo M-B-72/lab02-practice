@@ -1,0 +1,612 @@
+1.4 Exercises: Git Setup
+
+1. ★Easy Run git --version in your terminal. Write down the version number you see.  
+
+     version 2.53.0.windows.1
+
+2. ★Easy Run git config --global user.name "Your Name" with your actual name,
+then verify with git config user.name .
+
+Yes
+
+3. ★★Medium Git has many configuration options. Run git config --list and count
+how many settings are shown. Can you spot user.name and user.email in the list?
+
+Yes
+
+4. ★★Medium Research: what does git config --global core.editor "notepad" do?
+Run it and explain in one sentence
+
+Swaps default editor vim for Notepad
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+2.3 Exercises: First Repository
+
+1. ★Easy Create a new file called goodbye.py that contains a function goodbye(name)
+which returns "Goodbye, <name>!" . Stage it with git add goodbye.py and commit
+with the message "Add goodbye function".
+
+Yes
+
+2. ★Easy Run git log --oneline . You should now see two commits. Write down both
+commit messages.
+
+9aa1d0f (HEAD -> master) Add goodbye function
+438a43a Add greeting function
+
+3. ★★Medium Edit greet.py: change the return string to include an exclamation mark
+and a smiley face. Before staging, run git diff and observe the output. What do the
++ and - symbols mean?
+
+ - represents the older version
+ + represents the updated newer version
+
+4. ★★Medium Stage and commit your edit from Exercise 3 with an appropriate message.
+Then run git log --oneline and confirm you now have three commits.
+
+7d23d79 (HEAD -> master) Updated the greeting function
+9aa1d0f Add goodbye function
+438a43a Add greeting function
+
+5. ★★Medium Create two new files: file a.py and file b.py. Use git add . to stage
+both at once. Verify with git status that both are staged, then commit.
+
+Yes
+
+6. ★★★Hard Run git log (without --oneline). Study the full output. Each com-
+mit shows a long hexadecimal string (the commit hash), the author, the date, and the
+message. Why do you think Git uses these hashes instead of simple numbers like 1, 2, 3?
+
+git uses hashes primarily because of their uniqueness, integrity, and decentralization.  
+
+This also prevents merge failures and creates a unique trail of information.
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+3.3 Exercises: Undoing Mistakes
+
+1. ★Easy Edit goodbye.py to break it (delete a line or add garbage text). Then use
+git restore goodbye.py to fix it. Verify the file is back to normal.
+
+Yes
+
+2. ★Easy Run git status after restoring. What does it say?
+
+On branch master
+nothing to commit, working tree clean
+
+3. ★★Medium Make a change to greet.py, stage it with git add , but do not commit.
+Run git status —the file is shown as staged. Now run git restore --staged greet.py .
+What happened? Run git status again to see.
+
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   greet.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+4. ★★Medium Make a deliberate bad commit (e.g., add the line print("BUG") to any file,
+stage, and commit). Then use git revert to undo it. Verify with git log --oneline
+that both the bad commit and the revert commit appear.
+
+be74499 (HEAD -> master) Revert "Added a ! to the greeting function"
+ae2e200 Added a ! to the greeting function
+af7b7e3 Revert "Add a mistaken line"
+127ce4d Add a mistaken line
+955bfb4 Created Two New Files file_a.py, file_b.py
+7d23d79 Updated the greeting function
+9aa1d0f Add goodbye function
+438a43a Add greeting function
+
+5. ★★★Hard What happens if you try to git restore a file that has no changes? Try
+it and explain the result.
+
+Nothing Changes bro
+
+6. ★★★Hard Explain in your own words: why is git revert safer than just deleting the
+bad code and committing again? Think about what happens when you’re working with a
+teammate.
+
+Git revert is safer than simply deleting the bad code and committing again, because git revert is tracked
+when youre working in a team, and you delete code without context that can be problematic.
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+4.3 Exercises: Working with GitHub
+
+1. ★Easy Add a second file called about.txt containing your name and your favorite
+programming language. Stage, commit with a good message, and push to GitHub. Verify
+it appears on the website.
+
+it does :)
+
+2. ★Easy Run git remote -v in your cloned repo. What does it show? What does
+origin mean?
+
+
+origin  https://github.com/M-B-72/lab02-practice.git (fetch)
+origin  https://github.com/M-B-72/lab02-practice.git (push)
+
+
+origin is the default nickname for the main central repository you clone from
+
+3. ★★Medium Make three separate commits (edit a file, commit, repeat three times).
+Then push with a single git push . Check GitHub—do all three commits appear in the
+history?
+
+Yes they do
+
+4. ★★Medium On GitHub, click on your hello.py file, then click the pencil icon to edit
+it directly on the website. Add a comment line and commit the change on GitHub. Back
+in your terminal, run git pull . What happens?
+
+The hello.py file updates on my computer.
+
+
+5. ★★★Hard Why can’t you just email your code to a teammate instead of using GitHub?
+List at least three advantages of using GitHub over emailing files.
+
+emailing the codebase to your teammates creates multiple versions of the codebase.
+since all teammates are working on a sub-portion of the codebase no one has the complete codebase at any given time
+which makes merging all the commits of all teammates tricky and prone to errors, GitHub acts as a central hub from which
+all teammates derive and commit to.
+
+
+
+6. ★★★Hard Research: what is a .gitignore file? Create one in your repo that tells Git
+to ignore all files ending in .pyc. Commit and push it.
+
+
+A .gitignore file is a txt file that tells Git to skip these specific files or folders, to not track them, to not ask to add them, and never upload them to the server.
+
+did the task.
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+5.3 Exercises: Branches
+
+
+1. ★Easy Run git branch to see all branches. Which one has the * next to it?
+
+  add-farewell
+* main
+
+
+2. ★Easy Create a new branch called add-joke. Create a file joke.py that prints your
+favorite joke. Commit it on the branch.
+
+[add-joke 6da8ffd] Added a joke function
+ 1 file changed, 7 insertions(+)
+ create mode 100644 joke.py
+
+3. ★★Medium Switch back to main. Verify that joke.py is not visible. Then merge
+add-joke into main and verify the file appears.
+
+its not visible.
+
+merged
+
+appears
+
+
+4. ★★Medium After merging, delete the add-joke branch with git branch -d add-joke .
+Run git branch to confirm it’s gone. Is the joke.py file still on main?
+
+The branch has been deleted, Joke.py is on main*
+
+5. ★★Medium Push your updated main branch to GitHub. On the GitHub website, can
+you see all the commits from both branches in the history?
+
+
+Yes
+
+6. ★★★Hard Create two branches from main: feature-a and feature-b. On feature-a,
+create a.py. On feature-b, create b.py. Merge both back into main (one at a time).
+Run git log --oneline and observe the history.
+
+observed
+
+
+7. ★★★Hard Research: what is a merge conflict? When might one happen? (Hint:
+think about what happens when two branches edit the same line of the same file.)
+
+
+A merge conflict happens when git has two versions of the same file.
+
+it can happen when two different branches edit the same line of the same file
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+6.4 Exercises: Unit Testing
+
+1. ★Easy Add a function subtract(a, b) to math tools.py that returns a - b . Write
+a test subtract() function with at least 3 assert statements. Run your tests.
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+--- All tests passed! ---
+
+2. ★Easy Now introduce a deliberate bug into subtract : change return a - b to
+return a + b . Run your tests again. Which assert fails? Fix the bug and verify all
+tests pass.
+
+assert subtract(7, 2) == 5 gives the Assertion error
+
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+--- All tests passed! ---
+
+3. ★★Medium Write a function max of three(a, b, c) that returns the largest of three
+numbers. Write test max of three() with at least 5 assert statements. Include a case
+where two numbers are equal and a case where all three are equal.
+
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+test_max_of_three: ALL PASSED
+--- All tests passed! ---
+
+4. ★★Medium Write a function is palindrome(s) that returns True if the string s
+reads the same forwards and backwards (ignoring spaces, case-sensitive). Write at least 6
+test cases including edge cases: empty string, single character, and strings with spaces.
+
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+test_max_of_three: ALL PASSED
+test_is_palindrome: ALL PASSED
+--- All tests passed! ---
+
+5. ★★★Hard Write a function find min(numbers) that returns the smallest number in
+a list. Be careful with your initial value! Write tests that would catch the common bug of
+starting min val = 0 (hint: test with a list of all positive numbers).
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+test_max_of_three: ALL PASSED
+test_is_palindrome: ALL PASSED
+test_find_min: ALL PASSED
+--- All tests passed! ---
+
+
+6. ★★★Hard Write a function remove duplicates(items) that returns a new list with
+duplicates removed, preserving the original order. Write at least 6 tests including: empty
+list, no duplicates, all duplicates, mixed types (e.g., [1, "1"] ).
+
+
+test_add: ALL PASSED
+test_multiply: ALL PASSED
+test_is_even: ALL PASSED
+test_subtract: ALL PASSED
+test_max_of_three: ALL PASSED
+test_is_palindrome: ALL PASSED
+test_find_min: ALL PASSED
+test_remove_duplicates: ALL PASSED
+--- All tests passed! ---
+
+7. ★★★Hard After completing Exercises 1–6, stage all your changes and commit with the
+message "Add more functions and comprehensive tests". Push to GitHub. You’ve
+just followed the professional workflow!
+
+
+done
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+7.4 Exercises: Debugging
+
+1. ★Easy Open buggy.py in Thonny. Set a breakpoint on the if char in vowels line.
+Start debugging (Ctrl+F5). Press F8 (Resume) to jump to the breakpoint. What does
+the Variables panel show?
+
+char 'h'
+
+
+2. ★Easy Step through the loop with F6 a few times. Watch how char changes with each
+iteration. Write down the value of char and count for the first three iterations.
+
+1st
+char 'h'
+count  0
+
+2nd
+char 'e'
+count 0
+
+3rd
+char 'l'
+count 1
+
+
+3. ★★Medium Create a file bug hunt1.py with this code:
+
+and and fix the bug. (Hint: check the values of start and end .)
+
+end = len(items)
+
+4. ★★Medium Create bug hunt2.py:
+
+Use the debugger. What does the Variables panel show right after text.upper() runs?
+What went wrong?
+
+return text.upper()
+
+5. ★★★Hard Create bug hunt3.py:
+
+Use the debugger to step through the loop. Why is -3 being skipped? Fix the function.
+(Hint: build a new list instead of modifying the old one.)
+
+python skipped over -3  because when you remove an item the idex changes this causes a skip over -3.
+
+can be fixed by adding a new list and appending the positive numbers
+
+def remove_negatives(numbers):
+    
+    positive_numbers = []    
+    
+    for num in numbers:
+        if num >= 0:
+            positive_numbers.append(num)
+            
+    return positive_numbers
+
+print(remove_negatives ([1, -2, -3, 4, -5]))
+
+
+6. ★★★Hard Create bug hunt4.py:
+
+Use the debugger. What is the function actually checking—the index or the value? Fix it
+so it sums even values, not values at even indices.
+
+
+
+the function is actually checking—the index not the value.
+
+def sum_evens(numbers):
+    total = 0
+    
+    for num in numbers:
+        
+        if num % 2 == 0:
+            total += num
+            
+    return total
+
+print(sum_evens ([1, 2, 3, 4, 5, 6]))
+
+
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+8.3 Exercises: Bug Patterns
+
+1. ★Easy Look at this code and identify the bug without running it:
+What will print(square(5)) output? What kind of bug is this?
+
+print(square(5)) will print None, since square(x) does not return a value.
+
+it's kind of a logic bug since the logic is incomplete.
+
+2. ★Easy Look at this code and identify the bug:
+What will happen when you call countdown(3) ? What kind of bug is this?
+
+calling countdown(3) will result in a infinite print of 3 since we are not mutating the while loop's variable 'n'
+it is a logic bug.
+
+3. ★★Medium Write a test function test first n() for this buggy function. Make sure
+at least one of your tests catches the bug:
+
+
+def test_first_n():
+
+    data = ['a', 'b', 'c', 'd', 'e']
+    
+
+    result = first_n(data, 3)
+    
+    if result == ['a', 'b', 'c']:
+        print("Test Passed! Bale Bale")
+    else:
+        print(f"Test Failed! Thumbs down bro")
+
+#Test
+test_first_n()
+
+the bug is that the first_n() is not iterating over all the elements
+
+4. ★★Medium This function is supposed to calculate the total price after tax. Find the
+bug and fix it:
+
+def total_with_tax(price, tax_rate):
+    tax = price * tax_rate
+    total = price + tax
+    # Meant to return total
+    return total
+
+print(total_with_tax(100, 0.15))
+# Expected: 115.0
+# Actual:   None
+
+the bug is that there was no return value, it wasn't returning the total it was calculating.
+
+
+
+5. ★★★Hard This function should reverse a list in place. It has a subtle bug—write tests
+to catch it, then use the debugger to find it, then fix it:
+
+
+
+
+
+def reverse_list(items):
+    
+    #Reproduce 
+    #Calling reverse_list([1, 2, 3, 4]) returns [1, 2, 3, 4]. 
+
+    #Isolate
+    #By printing 'items' at the start and end of the loop i see the list 
+    #actually reverses halfway through, but then flips back. 
+
+    #Hypothesize
+    #Since the code is fixing the problem and then un-fixing it
+    #limiting the loop to the first half of the list will fix it 
+
+    #Test: 
+    #I changed range(len(items)) to range(len(items) // 2)
+
+    for i in range(len(items) // 2):
+        
+        j = len(items) - 1 - i
+        items[i], items[j] = items[j], items[i]
+        
+    return items
+
+    #Verify 
+    #running test_reverse_list() with [1, 2, 3, 4] now returns [4, 3, 2, 1]
+
+def test_reverse_list():
+    data = [1, 2, 3, 4]
+    expected = [4, 3, 2, 1]
+    
+    result = reverse_list(data)
+    
+    if result == expected:
+        print(" Mubarak ho Test Passed!")
+    else:
+        
+        print(f"Test Failed! dubara koshish kro")
+
+test_reverse_list()
+
+
+
+The bug was that the for loop was going over the entirety of the list, that's bad because
+in the first half it achieves the desired output and then it reverses and straightens again, 
+so we add // to get to the mid point.
+
+
+6. ★★★Hard Apply the Scientific Method for Debugging to Exercise 5: describe each of
+the five steps (Reproduce, Isolate, Hypothesize, Test, Verify) as you find and fix the bug.
+Write your answers as comments in your code.
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
