@@ -30,7 +30,7 @@ def find_min(numbers):
     min = numbers[0]
 
     for i in range(len(numbers)):
-        if numbers[i] > min:
+        if numbers[i] < min:
             min = numbers[i]
 
     return min

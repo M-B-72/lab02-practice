@@ -47,8 +47,8 @@ def test_is_palindrome():
 
 
 def test_find_min():
-    assert find_min([0, 1, 2, 3, 4, 5]) == 5
-    assert find_min([7, 1, 8, 3, 9, 5]) == 9
+    assert find_min([0, 1, 2, 3, 4, 5]) == 0
+    assert find_min([7, 1, 8, 3, 9, 5]) == 1
 
     print("test_find_min: ALL PASSED")
 
